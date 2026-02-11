@@ -1,12 +1,6 @@
 import type { NextConfig } from "next";
 
-const plausibleScriptSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC;
-const plausibleOrigin = plausibleScriptSrc ? new URL(plausibleScriptSrc).origin : "";
-
-const scriptSrc = ["'self'", "'unsafe-inline'", plausibleOrigin]
-  .filter(Boolean)
-  .join(" ");
-const connectSrc = ["'self'", plausibleOrigin].filter(Boolean).join(" ");
+const vercelAnalyticsScriptOrigin = "https://va.vercel-scripts.com";
 
 const securityHeaders = [
   {
@@ -27,7 +21,7 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src ${connectSrc}; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests`,
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${vercelAnalyticsScriptOrigin}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests`,
   },
 ];
 
