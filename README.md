@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# iomancer personal site
 
-## Getting Started
+A full-scope personal website built with Next.js App Router, TypeScript, Tailwind CSS, and local MDX content.
 
-First, run the development server:
+## Commands
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run typecheck
+npm run test:unit
+npm run test:e2e
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Content Authoring
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+MDX content lives under `content/`:
+- `content/projects/*.mdx`
+- `content/writing/*.mdx`
+- `content/now/*.mdx`
+- `content/pages/resume.mdx`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Frontmatter is validated with Zod at runtime.
 
-## Learn More
+## Docs
 
-To learn more about Next.js, take a look at the following resources:
+Planning and product artifacts:
+- `docs/product-spec.md`
+- `docs/decision-log.md`
+- `docs/acceptance-criteria.md`
+- `docs/non-goals.md`
+- `docs/tech-stack-hosting.md`
+- `docs/domain-shortlist.md`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Domain
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recommended launch domain: `iomancer.dev`.
+Set canonical host via `NEXT_PUBLIC_SITE_URL`.
 
-## Deploy on Vercel
+## Optional Env Vars
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `NEXT_PUBLIC_SITE_URL` canonical site URL (for metadata/sitemap)
+- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` enables Plausible analytics when set
+- `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC` override analytics script origin
