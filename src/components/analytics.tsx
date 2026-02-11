@@ -5,9 +5,12 @@ const plausibleScriptSrc =
   process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC ?? "https://plausible.io/js/script.js";
 
 export function Analytics() {
-  if (!plausibleDomain) {
+  const domain = plausibleDomain?.trim();
+  const scriptSrc = plausibleScriptSrc.trim();
+
+  if (!domain) {
     return null;
   }
 
-  return <Script defer data-domain={plausibleDomain} src={plausibleScriptSrc} />;
+  return <Script defer data-domain={domain} src={scriptSrc} />;
 }
