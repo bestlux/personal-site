@@ -41,5 +41,5 @@ Set canonical host via `NEXT_PUBLIC_SITE_URL`.
 ## Optional Env Vars
 
 - `NEXT_PUBLIC_SITE_URL` canonical site URL (for metadata/sitemap)
-- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` enables Plausible analytics when set
-- `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_SRC` override analytics script origin
+
+Analytics is provided by Vercel Web Analytics and does not require app env variables.

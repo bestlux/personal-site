@@ -20,7 +20,7 @@
 - Custom domain at launch (recommended candidate: `iomancer.dev`)
 
 ## Analytics
-- Privacy-first analytics platform (Plausible preferred)
+- Vercel Web Analytics
 
 ## CI
 - GitHub Actions workflow running lint, typecheck, unit tests, build, and e2e smoke

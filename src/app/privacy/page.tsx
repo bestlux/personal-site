@@ -20,8 +20,8 @@ export default function PrivacyPage() {
 
       <section className="panel space-y-4 p-6 text-text-dim">
         <p>
-          This site does not run ad trackers and does not sell personal data. Analytics are
-          intended to be lightweight and privacy-first.
+          This site does not run ad trackers and does not sell personal data. It uses Vercel Web
+          Analytics for lightweight, aggregate traffic insights.
         </p>
         <p>
           External links may lead to third-party platforms with their own privacy practices.
