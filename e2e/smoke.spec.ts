@@ -14,8 +14,8 @@ test("home route renders and links are reachable", async ({ page }) => {
 
 test("project filters and contact reveal work", async ({ page }) => {
   await page.goto("/projects");
-  await page.getByRole("button", { name: "prototype" }).click();
-  await expect(page.getByRole("link", { name: /neon briefing/i })).toBeVisible();
+  await page.getByRole("button", { name: "unity" }).click();
+  await expect(page.getByRole("link", { name: /voltline/i })).toBeVisible();
 
   await page.goto("/contact");
   await page.getByRole("button", { name: /reveal email/i }).click();

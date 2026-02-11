@@ -13,7 +13,7 @@ describe("content source", () => {
   it("loads projects and can resolve by slug", () => {
     const projects = getAllProjects();
     expect(projects.length).toBeGreaterThanOrEqual(3);
-    expect(getProjectBySlug("terminal-atlas")?.title).toBe("Terminal Atlas");
+    expect(getProjectBySlug("boundless")?.title).toBe("Boundless");
   });
 
   it("loads writing entries and tags", () => {
