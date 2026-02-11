@@ -1,65 +1,112 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Container } from "@/components/container";
+import { JsonLd } from "@/components/json-ld";
+import { PostCard } from "@/components/post-card";
+import { ProjectCard } from "@/components/project-card";
+import { getFeaturedProjects, getLatestNowEntry, getAllWriting } from "@/lib/content/source";
+import { siteConfig } from "@/lib/site-config";
 
 export default function Home() {
+  const featuredProjects = getFeaturedProjects().slice(0, 2);
+  const latestPosts = getAllWriting().slice(0, 2);
+  const now = getLatestNowEntry();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Container className="space-y-20 py-12 sm:py-16">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          sameAs: [siteConfig.social.github, siteConfig.social.x],
+          description: siteConfig.description,
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          description: siteConfig.description,
+        }}
+      />
+
+      <section className="panel relative overflow-hidden p-6 sm:p-10">
+        <p className="font-display text-xs uppercase tracking-[0.26em] text-accent-green">
+          Personal Signal Interface
+        </p>
+        <h1 className="mt-4 max-w-4xl font-display text-4xl uppercase leading-tight tracking-[0.04em] sm:text-6xl">
+          Building living systems for code, thought, and AI-era craft.
+        </h1>
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-text-dim">
+          This is my public workspace: projects in motion, writing in progress, and monthly
+          status updates on what I am building next.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/projects"
+            className="inline-flex h-11 min-w-11 items-center border border-accent-cyan px-4 text-sm uppercase tracking-[0.12em] text-accent-cyan transition hover:bg-accent-cyan hover:text-bg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Explore Projects
+          </Link>
+          <Link
+            href="/writing"
+            className="inline-flex h-11 min-w-11 items-center border border-border px-4 text-sm uppercase tracking-[0.12em] text-text-dim transition hover:border-accent-orange hover:text-accent-orange"
           >
-            Documentation
-          </a>
+            Read Writing
+          </Link>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="space-y-5">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-3xl uppercase tracking-[0.04em]">Featured Projects</h2>
+          <Link href="/projects" className="text-xs uppercase tracking-[0.16em] text-accent-cyan">
+            View all
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-3xl uppercase tracking-[0.04em]">Latest Writing</h2>
+          <Link href="/writing" className="text-xs uppercase tracking-[0.16em] text-accent-cyan">
+            View all
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {latestPosts.map((post) => (
+            <PostCard key={post.slug} post={post} />
+          ))}
+        </div>
+      </section>
+
+      <section className="panel space-y-4 p-6">
+        <h2 className="font-display text-3xl uppercase tracking-[0.04em]">Now</h2>
+        {now ? (
+          <>
+            <p className="text-sm uppercase tracking-[0.16em] text-accent-green">{now.month}</p>
+            <p className="text-lg text-text-dim">{now.summary}</p>
+            <ul className="list-disc space-y-2 pl-6 text-text-dim">
+              {now.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <Link href="/now" className="text-xs uppercase tracking-[0.16em] text-accent-cyan">
+              Full now log
+            </Link>
+          </>
+        ) : (
+          <p className="text-text-dim">No now entries published yet.</p>
+        )}
+      </section>
+    </Container>
   );
 }

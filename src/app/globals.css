@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-body: "Rajdhani", sans-serif;
+  --font-display: "Share Tech Mono", monospace;
+
+  --bg: #f4f7f9;
+  --bg-soft: #e8eef1;
+  --text: #10181e;
+  --text-dim: #344652;
+  --border: #8ea4b3;
+  --accent-cyan: #008ba3;
+  --accent-orange: #d16b00;
+  --accent-green: #1f8f55;
+}
+
+.dark {
+  --bg: #05090d;
+  --bg-soft: #0c141b;
+  --text: #e9f6ff;
+  --text-dim: #a5c2d3;
+  --border: #244357;
+  --accent-cyan: #48e5ff;
+  --accent-orange: #ff9d3d;
+  --accent-green: #57ff9f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-border: var(--border);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-green: var(--accent-green);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 10% 5%, color-mix(in oklab, var(--accent-cyan) 16%, transparent), transparent 30%),
+    radial-gradient(circle at 90% 0%, color-mix(in oklab, var(--accent-orange) 16%, transparent), transparent 28%),
+    var(--bg);
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg-soft) 84%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--accent-cyan) 20%, transparent) inset,
+    0 0 32px color-mix(in oklab, var(--accent-cyan) 10%, transparent);
+}
+
+a,
+button {
+  outline-offset: 4px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
