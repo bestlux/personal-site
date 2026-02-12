@@ -34,7 +34,7 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
 
   return (
     <div className="space-y-6">
-      <div className="panel space-y-4 p-4">
+      <div className="panel reveal-up space-y-5 p-4 sm:p-5">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Category</p>
           <div className="flex flex-wrap gap-2">
@@ -43,10 +43,10 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
                 key={category}
                 type="button"
                 className={cn(
-                  "h-11 min-w-11 border px-3 text-xs uppercase tracking-[0.12em] transition",
+                  "signal-chip h-11 min-w-11 px-3 text-xs uppercase tracking-[0.12em]",
                   activeCategory === category
-                    ? "border-accent-cyan text-accent-cyan"
-                    : "border-border text-text-dim hover:border-accent-cyan",
+                    ? "border-accent-cyan bg-accent-cyan/10 text-accent-cyan"
+                    : "text-text-dim",
                 )}
                 onClick={() => setActiveCategory(category)}
               >
@@ -64,10 +64,10 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
                 key={status}
                 type="button"
                 className={cn(
-                  "h-11 min-w-11 border px-3 text-xs uppercase tracking-[0.12em] transition",
+                  "signal-chip h-11 min-w-11 px-3 text-xs uppercase tracking-[0.12em]",
                   activeStatus === status
-                    ? "border-accent-orange text-accent-orange"
-                    : "border-border text-text-dim hover:border-accent-orange",
+                    ? "border-accent-orange bg-accent-orange/10 text-accent-orange"
+                    : "text-text-dim",
                 )}
                 onClick={() => setActiveStatus(status)}
               >
@@ -76,6 +76,9 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
             ))}
           </div>
         </div>
+        <p className="text-xs uppercase tracking-[0.14em] text-accent-cyan">
+          Showing {filtered.length} project{filtered.length === 1 ? "" : "s"}
+        </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">

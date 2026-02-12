@@ -18,7 +18,7 @@ export function EmailReveal({ user, host, tld }: EmailRevealProps) {
       <button
         type="button"
         onClick={() => setRevealed(true)}
-        className="h-11 min-w-11 border border-border px-4 text-sm uppercase tracking-[0.12em] transition hover:border-accent-cyan hover:text-accent-cyan"
+        className="signal-chip h-11 min-w-11 px-4 text-sm uppercase tracking-[0.12em]"
       >
         Reveal Email
       </button>
@@ -28,7 +28,7 @@ export function EmailReveal({ user, host, tld }: EmailRevealProps) {
   return (
     <a
       href={`mailto:${email}`}
-      className="inline-flex h-11 min-w-11 items-center border border-accent-cyan px-4 text-sm tracking-[0.08em] text-accent-cyan"
+      className="inline-flex h-11 min-w-11 items-center border border-accent-cyan px-4 text-sm tracking-[0.08em] text-accent-cyan transition hover:bg-accent-cyan hover:text-bg"
     >
       {email}
     </a>

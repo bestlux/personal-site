@@ -18,7 +18,7 @@ export default function ResumePage() {
     <Container className="space-y-8 py-12 sm:py-16">
       <PageIntro eyebrow="Capabilities" title="Resume" summary={resume.headline} />
 
-      <section className="panel space-y-6 p-6">
+      <section className="panel reveal-up space-y-6 p-6">
         <p className="text-lg text-text-dim">{resume.summary}</p>
 
         <div className="space-y-4">
@@ -42,7 +42,7 @@ export default function ResumePage() {
           <h2 className="font-display text-2xl uppercase tracking-[0.04em]">Skills</h2>
           <ul className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.1em] text-accent-cyan">
             {resume.skills.map((skill) => (
-              <li key={skill} className="border border-border px-2 py-1">
+              <li key={skill} className="signal-chip px-2 py-1">
                 {skill}
               </li>
             ))}
@@ -62,7 +62,7 @@ export default function ResumePage() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-11 min-w-11 items-center border border-border px-4 text-sm uppercase tracking-[0.12em] text-text-dim hover:border-accent-orange hover:text-accent-orange"
+              className="signal-chip inline-flex h-11 min-w-11 items-center px-4 text-sm uppercase tracking-[0.12em] text-text-dim hover:border-accent-orange hover:text-accent-orange"
             >
               {link.label}
             </a>

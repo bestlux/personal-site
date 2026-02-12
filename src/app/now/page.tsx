@@ -32,7 +32,7 @@ export default async function NowPage() {
 
       <div className="space-y-6">
         {renderedEntries.map((entry) => (
-          <article key={entry.month} className="panel space-y-4 p-6">
+          <article key={entry.month} className="panel reveal-up space-y-4 p-6">
             <header className="space-y-2">
               <p className="text-xs uppercase tracking-[0.16em] text-accent-green">
                 {formatMonth(entry.month)}
@@ -45,7 +45,7 @@ export default async function NowPage() {
               <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Focus</p>
               <ul className="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-[0.1em] text-accent-cyan">
                 {entry.focus.map((focusItem) => (
-                  <li key={focusItem} className="border border-border px-2 py-1">
+                  <li key={focusItem} className="signal-chip px-2 py-1">
                     {focusItem}
                   </li>
                 ))}

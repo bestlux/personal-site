@@ -48,7 +48,7 @@ export default async function WritingDetailPage({ params }: WritingPageProps) {
 
   return (
     <Container className="space-y-10 py-12 sm:py-16">
-      <header className="panel space-y-4 p-6">
+      <header className="panel reveal-up space-y-4 p-6">
         <p className="text-xs uppercase tracking-[0.16em] text-accent-green">
           {formatDate(post.publishedAt)} · {post.computedReadingTime} min read
         </p>
@@ -56,7 +56,7 @@ export default async function WritingDetailPage({ params }: WritingPageProps) {
         <p className="max-w-3xl text-lg text-text-dim">{post.excerpt}</p>
       </header>
 
-      <article className="panel p-6">{content}</article>
+      <article className="panel reveal-up delay-1 p-6">{content}</article>
     </Container>
   );
 }

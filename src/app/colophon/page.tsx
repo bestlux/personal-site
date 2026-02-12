@@ -18,7 +18,7 @@ export default function ColophonPage() {
         summary="How this site is built and maintained."
       />
 
-      <section className="panel space-y-5 p-6 text-text-dim">
+      <section className="panel reveal-up space-y-5 p-6 text-text-dim">
         <p>Framework: Next.js App Router with TypeScript.</p>
         <p>Styling: Tailwind CSS v4 with a custom retro-terminal design system.</p>
         <p>Content: Local MDX files validated through Zod.</p>

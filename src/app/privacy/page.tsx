@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         summary="This site is intentionally minimal and privacy-conscious."
       />
 
-      <section className="panel space-y-4 p-6 text-text-dim">
+      <section className="panel reveal-up space-y-4 p-6 text-text-dim">
         <p>
           This site does not run ad trackers and does not sell personal data. It uses Vercel Web
           Analytics for lightweight, aggregate traffic insights.

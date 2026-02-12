@@ -45,7 +45,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <Container className="space-y-10 py-12 sm:py-16">
-      <header className="panel space-y-4 p-6">
+      <header className="panel reveal-up space-y-4 p-6">
         <p className="text-xs uppercase tracking-[0.16em] text-accent-green">
           {project.status} · {formatDate(project.publishedAt)}
         </p>
@@ -55,14 +55,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <p className="max-w-3xl text-lg text-text-dim">{project.summary}</p>
         <ul className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.1em] text-accent-cyan">
           {project.tech.map((item) => (
-            <li key={item} className="border border-border px-2 py-1">
+            <li key={item} className="signal-chip px-2 py-1">
               {item}
             </li>
           ))}
         </ul>
       </header>
 
-      <article className="panel p-6">{content}</article>
+      <article className="panel reveal-up delay-1 p-6">{content}</article>
     </Container>
   );
 }

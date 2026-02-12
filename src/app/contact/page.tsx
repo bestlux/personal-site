@@ -20,7 +20,7 @@ export default function ContactPage() {
         summary="If a project, idea, or collaboration resonates, reach out through the channels below."
       />
 
-      <section className="panel space-y-6 p-6">
+      <section className="panel reveal-up space-y-6 p-6">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Email</p>
           <EmailReveal
@@ -37,7 +37,7 @@ export default function ContactPage() {
               href={siteConfig.social.x}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-11 min-w-11 items-center border border-border px-4 text-sm uppercase tracking-[0.12em] text-text-dim hover:border-accent-cyan hover:text-accent-cyan"
+              className="signal-chip inline-flex h-11 min-w-11 items-center px-4 text-sm uppercase tracking-[0.12em] text-text-dim"
             >
               X
             </a>
@@ -45,7 +45,7 @@ export default function ContactPage() {
               href={siteConfig.social.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-11 min-w-11 items-center border border-border px-4 text-sm uppercase tracking-[0.12em] text-text-dim hover:border-accent-cyan hover:text-accent-cyan"
+              className="signal-chip inline-flex h-11 min-w-11 items-center px-4 text-sm uppercase tracking-[0.12em] text-text-dim"
             >
               GitHub
             </a>

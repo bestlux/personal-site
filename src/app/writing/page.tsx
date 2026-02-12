@@ -24,14 +24,14 @@ export default function WritingPage() {
         summary="Thoughtful technical essays on building, AI, and long-term systems thinking."
       />
 
-      <section className="panel space-y-3 p-4">
+      <section className="panel reveal-up delay-1 space-y-3 p-4">
         <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Tags</p>
         <ul className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
           {tags.map((tag) => (
             <li key={tag}>
               <Link
                 href={`/tags/${encodeURIComponent(tag)}`}
-                className="inline-flex h-11 min-w-11 items-center border border-border px-3 text-text-dim hover:border-accent-cyan hover:text-accent-cyan"
+                className="signal-chip inline-flex h-11 min-w-11 items-center px-3 text-text-dim"
               >
                 {tag}
               </Link>
