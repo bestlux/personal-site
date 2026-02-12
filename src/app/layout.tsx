@@ -63,9 +63,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${bodyFont.variable} ${displayFont.variable} bg-bg text-text antialiased`}>
         <ThemeProvider>
-          <div className="grid-overlay min-h-screen">
+          <div className="grid-overlay relative min-h-screen">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-accent-cyan/10 to-transparent"
+            />
             <SiteHeader />
-            <main>{children}</main>
+            <main className="relative">{children}</main>
             <SiteFooter />
           </div>
         </ThemeProvider>

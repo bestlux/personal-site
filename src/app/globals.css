@@ -4,36 +4,42 @@
   --font-body: "Rajdhani", sans-serif;
   --font-display: "Share Tech Mono", monospace;
 
-  --bg: #f4f7f9;
-  --bg-soft: #e8eef1;
-  --text: #10181e;
-  --text-dim: #344652;
-  --border: #8ea4b3;
-  --accent-cyan: #008ba3;
-  --accent-orange: #d16b00;
-  --accent-green: #1f8f55;
+  --bg: #f2f6f8;
+  --bg-soft: #e4edf2;
+  --bg-elev: #fbfdff;
+  --text: #0b1822;
+  --text-dim: #385062;
+  --border: #84a0b3;
+  --accent-cyan: #0e9db8;
+  --accent-orange: #d16f1a;
+  --accent-green: #1fa56a;
+  --accent-warm: #ffd3a9;
 }
 
 .dark {
-  --bg: #05090d;
-  --bg-soft: #0c141b;
-  --text: #e9f6ff;
-  --text-dim: #a5c2d3;
-  --border: #244357;
-  --accent-cyan: #48e5ff;
-  --accent-orange: #ff9d3d;
-  --accent-green: #57ff9f;
+  --bg: #05090e;
+  --bg-soft: #0d1720;
+  --bg-elev: #132230;
+  --text: #e7f4fc;
+  --text-dim: #a3bdd0;
+  --border: #2b4b61;
+  --accent-cyan: #3fe8ff;
+  --accent-orange: #ffac4d;
+  --accent-green: #59f0af;
+  --accent-warm: #ffc590;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-soft: var(--bg-soft);
+  --color-bg-elev: var(--bg-elev);
   --color-text: var(--text);
   --color-text-dim: var(--text-dim);
   --color-border: var(--border);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-orange: var(--accent-orange);
   --color-accent-green: var(--accent-green);
+  --color-accent-warm: var(--accent-warm);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
   --font-mono: var(--font-display);
@@ -49,26 +55,148 @@ body {
 }
 
 body {
+  color: var(--text);
   font-family: var(--font-body);
   background:
-    radial-gradient(circle at 10% 5%, color-mix(in oklab, var(--accent-cyan) 16%, transparent), transparent 30%),
-    radial-gradient(circle at 90% 0%, color-mix(in oklab, var(--accent-orange) 16%, transparent), transparent 28%),
+    radial-gradient(
+      90% 80% at -5% 0%,
+      color-mix(in oklab, var(--accent-cyan) 18%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      70% 60% at 110% -5%,
+      color-mix(in oklab, var(--accent-orange) 15%, transparent),
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--bg-soft) 42%, var(--bg)),
+      var(--bg) 28%
+    ),
     var(--bg);
 }
 
 .grid-overlay {
+  isolation: isolate;
   background-image:
-    linear-gradient(color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px, transparent 1px);
-  background-size: 2rem 2rem;
+    linear-gradient(
+      color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--accent-cyan) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    repeating-linear-gradient(
+      -9deg,
+      color-mix(in oklab, var(--accent-cyan) 2%, transparent) 0 2px,
+      transparent 2px 14px
+    );
+  background-size:
+    2.25rem 2.25rem,
+    2.25rem 2.25rem,
+    auto;
 }
 
 .panel {
-  border: 1px solid var(--border);
-  background: color-mix(in oklab, var(--bg-soft) 84%, transparent);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--border) 88%, var(--accent-cyan));
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in oklab, var(--bg-elev) 86%, transparent),
+      color-mix(in oklab, var(--bg-soft) 90%, transparent)
+    ),
+    color-mix(in oklab, var(--bg-soft) 72%, transparent);
   box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--accent-cyan) 20%, transparent) inset,
-    0 0 32px color-mix(in oklab, var(--accent-cyan) 10%, transparent);
+    0 1.5rem 2.4rem -2rem color-mix(in oklab, var(--accent-cyan) 25%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--accent-cyan) 18%, transparent) inset;
+  backdrop-filter: blur(8px);
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    color-mix(in oklab, var(--accent-cyan) 14%, transparent),
+    transparent 40%,
+    color-mix(in oklab, var(--accent-orange) 13%, transparent) 95%
+  );
+  opacity: 0.34;
+}
+
+.panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-interactive {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.panel-interactive:hover {
+  transform: translateY(-0.18rem);
+  border-color: color-mix(in oklab, var(--accent-cyan) 56%, var(--border));
+  box-shadow:
+    0 1.75rem 2.5rem -2rem color-mix(in oklab, var(--accent-cyan) 34%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--accent-cyan) 32%, transparent) inset;
+}
+
+.signal-chip {
+  border: 1px solid color-mix(in oklab, var(--border) 84%, var(--accent-cyan));
+  background: color-mix(in oklab, var(--bg-soft) 82%, transparent);
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.signal-chip:hover {
+  border-color: color-mix(in oklab, var(--accent-cyan) 64%, var(--border));
+  color: var(--accent-cyan);
+}
+
+.signal-rule {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--accent-cyan) 72%, transparent),
+    color-mix(in oklab, var(--accent-orange) 60%, transparent)
+  );
+}
+
+.reveal-up {
+  animation: reveal-up 0.55s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+.delay-1 {
+  animation-delay: 80ms;
+}
+
+.delay-2 {
+  animation-delay: 160ms;
+}
+
+.delay-3 {
+  animation-delay: 240ms;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.7rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 a,
@@ -89,5 +217,9 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .panel-interactive:hover {
+    transform: none;
   }
 }
