@@ -1,6 +1,18 @@
-# iomancer personal site
+# iomancer | Personal Signal Interface
 
-A full-scope personal website built with Next.js App Router, TypeScript, Tailwind CSS, and local MDX content.
+A high-performance, industrial-themed personal engineering portfolio. Built with Next.js App Router, TypeScript, Tailwind CSS, and local MDX content.
+
+Designed to emulate a tactical aerospace or mission-control dashboard, featuring fluid micro-interactions, a stark functional color palette, and a keyboard-first global command menu.
+
+## Architecture & Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Animation:** Framer Motion (spring-physics based layout transitions)
+- **Content:** Local MDX validated rigorously by Zod
+- **UX Tooling:** `cmdk` (Global Command Palette), Radix UI (Accessibility), Lucide React (Icons)
+- **Deployment:** Vercel Web Analytics
 
 ## Commands
 
@@ -13,33 +25,32 @@ npm run test:e2e
 npm run build
 ```
 
-## Content Authoring
+## Content Authoring (MDX)
 
-MDX content lives under `content/`:
-- `content/projects/*.mdx`
-- `content/writing/*.mdx`
-- `content/now/*.mdx`
-- `content/pages/resume.mdx`
+All content is statically managed in the `content/` directory:
+- `content/projects/*.mdx` - Project dossiers and case studies.
+- `content/writing/*.mdx` - Technical essays and telemetry logs.
+- `content/now/*.mdx` - Monthly "Now Dashboard" system status updates.
+- `content/pages/resume.mdx` - Professional history.
 
-Frontmatter is validated with Zod at runtime.
+Frontmatter is strictly typed and validated with Zod at runtime (`src/lib/content/schemas.ts`).
 
-## Docs
+### Custom MDX Components
+- `<Callout type="info|warning|error">` - Renders a tactical system alert box inside articles.
+- Code blocks (`<pre>`) are styled as stark terminal output panels.
 
-Planning and product artifacts:
-- `docs/product-spec.md`
-- `docs/decision-log.md`
-- `docs/acceptance-criteria.md`
-- `docs/non-goals.md`
-- `docs/tech-stack-hosting.md`
-- `docs/domain-shortlist.md`
+## UI Design Language
+
+The site employs a **High-Tech Brutalism / Aerospace** aesthetic:
+- **Typography:** `Inter` for highly readable body prose, `JetBrains Mono` for all data, telemetry, and structural UI elements.
+- **Grids & Borders:** Heavy reliance on 1px functional borders, removing all soft shadows and glassmorphism.
+- **Micro-interactions:**
+  - `<TextScramble />` - Hardware decryption effect on primary headers.
+  - Hover states trigger tactical 90-degree crosshair rotations.
+  - A global, subtle CSS CRT scanline overlay (`.scanlines`).
+  - Native-app style page transitions (`layoutId` navigation underlines, `Template` sliding page mounts).
 
 ## Domain
 
 Recommended launch domain: `iomancer.dev`.
 Set canonical host via `NEXT_PUBLIC_SITE_URL`.
-
-## Optional Env Vars
-
-- `NEXT_PUBLIC_SITE_URL` canonical site URL (for metadata/sitemap)
-
-Analytics is provided by Vercel Web Analytics and does not require app env variables.
