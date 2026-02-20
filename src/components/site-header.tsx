@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { navItems, siteConfig } from "@/lib/site-config";
 import { useEffect, useState } from "react";
 import { Terminal } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -76,7 +77,10 @@ export function SiteHeader() {
                     >
                       {item.label}
                       {isActive && (
-                        <span className="absolute -bottom-[19px] left-0 right-0 h-[2px] bg-text" />
+                        <motion.span 
+                          layoutId="nav-indicator"
+                          className="absolute -bottom-[19px] left-0 right-0 h-[2px] bg-text" 
+                        />
                       )}
                     </Link>
                   </li>
