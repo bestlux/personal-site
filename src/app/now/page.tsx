@@ -65,10 +65,10 @@ export default async function NowPage() {
 
           <div className="space-y-4 pt-4 border-t border-border/50">
             <h3 className="font-mono flex items-center gap-2 text-xs uppercase tracking-widest text-accent-muted">
-              <Activity size={14} /> // ACTIVE_TRACKS
+              <Activity size={14} /> {"//"} ACTIVE_TRACKS
             </h3>
             <ul className="space-y-3 font-mono text-sm">
-              {latestEntry.items.map((item, idx) => (
+              {latestEntry.items.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 size={16} className="text-accent-secondary mt-0.5 shrink-0" />
                   <span className="text-text-dim leading-snug">{item}</span>
@@ -82,7 +82,7 @@ export default async function NowPage() {
         <div className="flex flex-col gap-6">
           <div className="panel p-6 space-y-4">
             <h3 className="font-mono flex items-center gap-2 text-xs uppercase tracking-widest text-accent-muted border-b border-border/50 pb-2">
-              <Target size={14} /> // CURRENT_VECTORS
+              <Target size={14} /> {"//"} CURRENT_VECTORS
             </h3>
             <ul className="flex flex-wrap gap-2 pt-2">
               {latestEntry.focus.map((focusItem) => (
@@ -98,7 +98,7 @@ export default async function NowPage() {
 
           <div className="panel p-6 flex-1">
             <h3 className="font-mono flex items-center gap-2 text-xs uppercase tracking-widest text-accent-muted border-b border-border/50 pb-2">
-              <Clock size={14} /> // SYSTEM_UPTIME
+              <Clock size={14} /> {"//"} SYSTEM_UPTIME
             </h3>
             <div className="pt-6 space-y-4">
               <div>
@@ -121,7 +121,7 @@ export default async function NowPage() {
       {/* Extended Notes */}
       <div className="panel p-6 sm:p-10">
         <h3 className="font-mono text-xs uppercase tracking-widest text-accent-muted border-b border-border/50 pb-4 mb-6">
-          // COMPILED_NOTES
+          {"//"} COMPILED_NOTES
         </h3>
         <div className="prose-custom max-w-none">
           {renderedLatestContent}

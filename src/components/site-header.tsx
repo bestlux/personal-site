@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { navItems, siteConfig } from "@/lib/site-config";
+import { navItems } from "@/lib/site-config";
 import { useEffect, useState } from "react";
 import { Terminal } from "lucide-react";
 import { motion } from "framer-motion";
