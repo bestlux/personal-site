@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { navItems, siteConfig } from "@/lib/site-config";
 import { useEffect, useState } from "react";
+import { Terminal } from "lucide-react";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -85,6 +86,14 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-4">
+            <button 
+              onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
+              className="hidden md:flex items-center gap-2 font-mono text-[10px] text-text-dim border border-border/50 px-2 py-1 rounded-sm hover:text-text hover:border-text transition-colors bg-bg-soft"
+              title="Open Command Palette"
+            >
+              <Terminal size={12} />
+              <span>⌘K</span>
+            </button>
             <ThemeToggle />
           </div>
         </div>

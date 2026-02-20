@@ -4,6 +4,7 @@ import { Analytics } from "@/components/analytics";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CommandPalette } from "@/components/command-palette";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${bodyFont.variable} ${displayFont.variable} bg-bg text-text antialiased`}>
         <ThemeProvider>
+          <CommandPalette />
           <div className="relative min-h-screen flex flex-col">
             <SiteHeader />
             <main className="relative flex-1">{children}</main>
