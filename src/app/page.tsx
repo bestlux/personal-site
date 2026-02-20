@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
 import { PostCard } from "@/components/post-card";
 import { ProjectCard } from "@/components/project-card";
+import { TextScramble } from "@/components/text-scramble";
 import { getFeaturedProjects, getLatestNowEntry, getAllWriting } from "@/lib/content/source";
 import { siteConfig } from "@/lib/site-config";
 import { Terminal, Cpu, Network } from "lucide-react";
@@ -46,7 +47,7 @@ export default function Home() {
             </div>
             
             <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl text-text">
-              Senior Software Engineer. <br />
+              <TextScramble text="Senior Software Engineer." duration={1200} /> <br />
               <span className="text-text-dim">Systems, WPF, & Infrastructure.</span>
             </h1>
             

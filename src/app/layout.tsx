@@ -63,6 +63,7 @@ export default function RootLayout({
       <body className={`${bodyFont.variable} ${displayFont.variable} bg-bg text-text antialiased`}>
         <ThemeProvider>
           <CommandPalette />
+          <div className="scanlines" aria-hidden="true" />
           <div className="relative min-h-screen flex flex-col">
             <SiteHeader />
             <main className="relative flex-1">{children}</main>
