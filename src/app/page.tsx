@@ -95,7 +95,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-6">
+          <dl className="grid grid-cols-2 gap-6">
             <div className="panel p-4 flex flex-col justify-between">
               <dt className="font-mono text-xs text-text-dim mb-2 uppercase tracking-widest border-b border-border pb-2">Active Nodes</dt>
               <dd className="font-mono text-3xl text-accent-secondary mt-2">{featuredProjects.length}</dd>
@@ -104,7 +104,7 @@ export default function Home() {
               <dt className="font-mono text-xs text-text-dim mb-2 uppercase tracking-widest border-b border-border pb-2">Data Streams</dt>
               <dd className="font-mono text-3xl text-accent-primary mt-2">{latestPosts.length}</dd>
             </div>
-          </div>
+          </dl>
         </aside>
       </section>
 

@@ -3,9 +3,9 @@ import axe from "axe-core";
 
 test("home route renders and links are reachable", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /building living systems/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Senior Software Engineer/i })).toBeVisible();
 
-  await page.getByRole("link", { name: /explore projects/i }).click();
+  await page.getByRole("link", { name: /access_archive/i }).click();
   await expect(page).toHaveURL(/\/projects$/);
 
   await page.getByRole("link", { name: /writing/i }).first().click();

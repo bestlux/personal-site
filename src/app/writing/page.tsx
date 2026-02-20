@@ -33,7 +33,7 @@ export default function WritingPage() {
             <li key={tag}>
               <Link
                 href={`/tags/${encodeURIComponent(tag)}`}
-                className="px-2 py-1 border border-border/50 text-text-dim hover:text-text hover:border-text transition-colors bg-bg-soft"
+                className="px-2 py-1 border border-border/50 text-text hover:text-bg hover:bg-text hover:border-text transition-colors"
               >
                 {tag}
               </Link>
