@@ -48,6 +48,13 @@
   --color-accent-muted: var(--accent-muted);
   --font-sans: var(--font-body);
   --font-mono: var(--font-display);
+
+  /* Legacy aliases to prevent regressions */
+  --color-accent-cyan: var(--accent-secondary);
+  --color-accent-orange: var(--accent-primary);
+  --color-accent-green: var(--accent-secondary);
+  --color-accent-warm: var(--accent-warning);
+  --font-display: var(--font-display);
 }
 
 * {

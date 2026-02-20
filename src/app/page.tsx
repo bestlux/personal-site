@@ -42,7 +42,7 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-secondary"></span>
               </span>
-              SYS.STATUS: ONLINE // CA-US
+              SYS.STATUS: ONLINE {"//"} CA-US
             </div>
             
             <h1 className="max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl text-text">
@@ -75,7 +75,7 @@ export default function Home() {
           <div className="panel p-6 flex-1 flex flex-col justify-between">
             <div className="space-y-4">
               <p className="font-mono flex items-center gap-2 text-xs uppercase tracking-widest text-accent-muted border-b border-border pb-2">
-                <Terminal size={14} /> // OPERATIONAL_PARAMETERS
+                <Terminal size={14} /> {"//"} OPERATIONAL_PARAMETERS
               </p>
               <ul className="space-y-3 font-mono text-sm mt-4">
                 <li className="flex justify-between items-center border-b border-border/50 pb-2">
@@ -110,7 +110,7 @@ export default function Home() {
       <section className="space-y-8">
         <header className="flex items-end justify-between border-b border-border pb-4">
           <div className="space-y-1">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent-secondary">// DEPLOYED_SYSTEMS</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-accent-secondary">{"//"} DEPLOYED_SYSTEMS</p>
             <h2 className="text-2xl font-semibold tracking-tight text-text">Featured Projects</h2>
           </div>
           <Link href="/projects" className="font-mono text-xs uppercase tracking-widest text-text-dim hover:text-text transition-colors">
@@ -127,7 +127,7 @@ export default function Home() {
       <section className="space-y-8">
         <header className="flex items-end justify-between border-b border-border pb-4">
           <div className="space-y-1">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent-primary">// TELEMETRY_LOGS</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-accent-primary">{"//"} TELEMETRY_LOGS</p>
             <h2 className="text-2xl font-semibold tracking-tight text-text">Latest Writing</h2>
           </div>
           <Link href="/writing" className="font-mono text-xs uppercase tracking-widest text-text-dim hover:text-text transition-colors">

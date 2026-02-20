@@ -26,7 +26,7 @@ export default function WritingPage() {
 
       <section className="space-y-4 py-4">
         <p className="font-mono text-xs uppercase tracking-widest text-text-dim flex items-center gap-2">
-          // SYS.TAGS
+          {"//"} SYS.TAGS
         </p>
         <ul className="flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-widest">
           {tags.map((tag) => (

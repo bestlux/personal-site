@@ -14,7 +14,7 @@ export function PageIntro({ eyebrow, title, summary, className }: PageIntroProps
       <div className="flex items-center justify-between">
         {eyebrow && (
           <p className="font-mono flex items-center gap-2 text-xs uppercase tracking-widest text-accent-muted">
-            <Terminal size={14} /> // {eyebrow}
+            <Terminal size={14} /> {"//"} {eyebrow}
           </p>
         )}
       </div>

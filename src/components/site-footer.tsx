@@ -57,7 +57,7 @@ export function SiteFooter() {
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="mt-4 flex sm:mt-0 gap-4">
             <span>TERMINAL_ID: 4A-99B</span>
-            <span className="hidden sm:inline-block text-accent-muted">//</span>
+            <span className="hidden sm:inline-block text-accent-muted">{"//"}</span>
             <span className="hidden sm:inline-block">RENDER_MODE: STATIC</span>
           </div>
         </div>
