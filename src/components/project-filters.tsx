@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { Project } from "@/lib/content/schemas";
 import { ProjectCard } from "@/components/project-card";
 import { cn } from "@/lib/utils";
+import { Filter } from "lucide-react";
 
 interface ProjectFiltersProps {
   projects: Project[];
@@ -33,20 +34,27 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
   }, [activeCategory, activeStatus, projects]);
 
   return (
-    <div className="space-y-6">
-      <div className="panel reveal-up space-y-5 p-4 sm:p-5">
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Category</p>
+    <div className="space-y-8">
+      <div className="panel space-y-6 p-6">
+        <div className="flex items-center gap-2 border-b border-border/50 pb-2">
+          <Filter size={14} className="text-accent-muted" />
+          <p className="font-mono text-xs uppercase tracking-widest text-text-dim">
+            SYS.FILTER_CONFIG
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-accent-muted">Category_Select</p>
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <button
                 key={category}
                 type="button"
                 className={cn(
-                  "signal-chip h-11 min-w-11 px-3 text-xs uppercase tracking-[0.12em]",
+                  "px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest border transition-colors",
                   activeCategory === category
-                    ? "border-accent-cyan bg-accent-cyan/10 text-accent-cyan"
-                    : "text-text-dim",
+                    ? "border-text bg-text text-bg font-semibold"
+                    : "border-border/50 text-text-dim hover:text-text hover:border-text bg-bg-soft",
                 )}
                 onClick={() => setActiveCategory(category)}
               >
@@ -56,18 +64,18 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.16em] text-text-dim">Status</p>
+        <div className="space-y-3">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-accent-muted">Status_Select</p>
           <div className="flex flex-wrap gap-2">
             {statuses.map((status) => (
               <button
                 key={status}
                 type="button"
                 className={cn(
-                  "signal-chip h-11 min-w-11 px-3 text-xs uppercase tracking-[0.12em]",
+                  "px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest border transition-colors",
                   activeStatus === status
-                    ? "border-accent-orange bg-accent-orange/10 text-accent-orange"
-                    : "text-text-dim",
+                    ? "border-text bg-text text-bg font-semibold"
+                    : "border-border/50 text-text-dim hover:text-text hover:border-text bg-bg-soft",
                 )}
                 onClick={() => setActiveStatus(status)}
               >
@@ -76,12 +84,19 @@ export function ProjectFilters({ projects }: ProjectFiltersProps) {
             ))}
           </div>
         </div>
-        <p className="text-xs uppercase tracking-[0.14em] text-accent-cyan">
-          Showing {filtered.length} project{filtered.length === 1 ? "" : "s"}
-        </p>
+        
+        <div className="pt-4 border-t border-border/50 flex justify-end">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-accent-secondary flex items-center gap-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent-secondary"></span>
+            </span>
+            RESULTS_FOUND: {filtered.length}
+          </p>
+        </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         {filtered.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
