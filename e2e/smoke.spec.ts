@@ -20,7 +20,7 @@ test("project filters and contact reveal work", async ({ page }) => {
   await page.goto("/contact");
   await page.getByRole("button", { name: /reveal email/i }).click();
   await expect(
-    page.getByRole("link", { name: /iomancer@iomancer\.com/i }),
+    page.getByRole("link", { name: /hello@iomancer\.dev/i }),
   ).toBeVisible();
 });
 

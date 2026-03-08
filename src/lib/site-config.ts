@@ -5,13 +5,13 @@ export const siteConfig = {
     "A living hub for projects, writing, experiments, and technical reflections.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://iomancer.dev",
   emailParts: {
-    user: "iomancer",
+    user: "hello",
     host: "iomancer",
-    tld: "com",
+    tld: "dev",
   },
   social: {
     x: "https://x.com/iomancer",
-    github: "https://github.com/iomancer",
+    github: "https://github.com/bestlux",
   },
 } as const;
 
