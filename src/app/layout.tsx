@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
 import { Analytics } from "@/components/analytics";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -13,8 +13,14 @@ const bodyFont = Inter({
   subsets: ["latin"],
 });
 
-const displayFont = JetBrains_Mono({
+const displayFont = Cormorant_Garamond({
   variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const monoFont = JetBrains_Mono({
+  variable: "--font-mono-ui",
   subsets: ["latin"],
 });
 
@@ -60,11 +66,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${bodyFont.variable} ${displayFont.variable} bg-bg text-text antialiased`}>
+      <body className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} bg-bg text-text antialiased`}>
         <ThemeProvider>
           <CommandPalette />
           <div className="scanlines" aria-hidden="true" />
-          <div className="relative min-h-screen flex flex-col">
+          <div className="site-shell relative min-h-screen flex flex-col">
             <SiteHeader />
             <main className="relative flex-1">{children}</main>
             <SiteFooter />
