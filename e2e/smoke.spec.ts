@@ -77,6 +77,49 @@ test("panel entrance does not create a transient scrollbar", async ({
   ).toBe(true);
 });
 
+for (const width of [1440, 390]) {
+  test(`sections switch in one click at ${width}px without restarting the vignette`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 960 });
+    await page.goto("/");
+    await page.getByRole("link", { name: "About 01", exact: true }).click();
+    const vignette = await page.locator(".distance-vignette").elementHandle();
+    for (const [label, title] of [
+      ["Reading 02", "Reading"],
+      ["Music 03", "Music"],
+      ["About 01", "About"],
+    ]) {
+      const link = page.getByRole("link", { name: label, exact: true });
+      await link.click();
+      await expect(
+        page.getByRole("dialog", { name: title, exact: true }),
+      ).toBeVisible();
+      await expect(link).toHaveAttribute("aria-current", "true");
+      expect(
+        await vignette!.evaluate(
+          (element) => element === document.querySelector(".distance-vignette"),
+        ),
+      ).toBe(true);
+    }
+    await page.getByRole("link", { name: "Reading 02", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("dialog", { name: "Reading", exact: true }),
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toBeHidden();
+    await expect(
+      page.getByRole("link", { name: "Reading 02", exact: true }),
+    ).toBeFocused();
+    await page.getByRole("link", { name: "Music 03", exact: true }).click();
+    await page
+      .locator(".distance-vignette")
+      .click({ position: { x: width / 2, y: 5 } });
+    await expect(page.getByRole("dialog")).toBeHidden();
+  });
+}
+
 test("unknown book and music URLs return 404", async ({ request }) => {
   expect((await request.get("/reading/not-a-book")).status()).toBe(404);
   expect((await request.get("/music/not-a-song")).status()).toBe(404);

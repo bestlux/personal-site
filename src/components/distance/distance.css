@@ -112,6 +112,7 @@ body:has(.distance)::after {
   margin-left: 20px;
 }
 .distance-nav {
+  z-index: 2;
   position: absolute;
   left: 55px;
   top: 190px;
@@ -143,10 +144,12 @@ body:has(.distance)::after {
 .distance-nav a:hover {
   padding-left: 9px;
 }
-.distance-nav a:hover .distance-dot {
+.distance-nav a:hover .distance-dot,
+.distance-nav a[aria-current] .distance-dot {
   background: #c1d1d8;
 }
 .distance-identity {
+  z-index: 2;
   position: absolute;
   left: 49px;
   bottom: 115px;
@@ -260,19 +263,23 @@ body:has(.distance)::after {
   text-shadow: 0 1px 5px #071019;
 }
 .distance-reader {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
   color: var(--text);
   border: 0;
   padding: 0;
   background: transparent;
   box-shadow: none;
-  width: min(570px, calc(100vw - 48px));
+  width: min(570px, calc(100vw - 350px));
   max-height: calc(100dvh - 96px);
   margin: auto clamp(24px, 5vw, 90px) auto auto;
 }
-.distance-reader::backdrop {
+.distance-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
   background: linear-gradient(90deg, #060d1226 5%, #060d12db 57%, #060d12f5);
-}
-.distance-reader[open]::backdrop {
   animation: distance-vignette-in 1.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 .distance-reader[open] {
@@ -631,16 +638,37 @@ body:has(.distance)::after {
   .distance-photo-only .distance-main {
     min-height: 600px;
   }
-  .distance-home:has(.distance-reader[open]) .distance-ui,
+  .distance-home:has(.distance-reader[open]) .distance-top,
+  .distance-home:has(.distance-reader[open]) .distance-identity,
   .distance-home:has(.distance-reader[open]) .distance-bottom,
   .distance-home:has(.distance-reader[open]) .distance-earth {
     opacity: 0;
+    visibility: hidden;
+  }
+  .distance-home:has(.distance-reader[open]) .distance-nav {
+    position: fixed;
+    top: 22px;
+    left: 25px;
+    right: 25px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .distance-home:has(.distance-reader[open]) .distance-nav a {
+    width: auto;
+    gap: 8px;
+    font-size: 17px;
+    padding: 12px 0;
+  }
+  .distance-home:has(.distance-reader[open]) .distance-nav .distance-dot {
+    margin-left: 0;
   }
   .distance-reader {
+    inset: 84px 0 24px;
     margin: auto;
-    max-height: calc(100dvh - 48px);
+    width: calc(100vw - 48px);
+    max-height: calc(100dvh - 108px);
   }
-  .distance-reader::backdrop {
+  .distance-vignette {
     background: #060d12e8;
   }
   .distance-reader-body {

@@ -10,6 +10,7 @@ import {
 } from "react";
 import { emailHref, photoSource } from "./content";
 import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 type Panel = "about" | "reading" | "music" | "photograph";
 
@@ -26,16 +27,27 @@ export function DistanceHome({
   const [photographOnly, setPhotographOnly] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLElement | null>(null);
+  const reducedMotion = useReducedMotion();
+  const isOpen = panel !== null;
 
   useEffect(() => {
-    if (!panel) return;
-    dialog.current?.showModal();
+    if (!isOpen) return;
+    dialog.current?.show();
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      dialog.current?.close();
+      setPanel(null);
+      trigger.current?.focus();
+    }
+    document.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previous;
+      document.removeEventListener("keydown", onKeyDown);
     };
-  }, [panel]);
+  }, [isOpen]);
 
   function openPanel(id: Panel, event: MouseEvent<HTMLElement>) {
     if (
@@ -75,6 +87,7 @@ export function DistanceHome({
           />
           <button
             className="distance-earth"
+            disabled={isOpen}
             aria-label="About the Pale Blue Dot photograph"
             onClick={(event) => openPanel("photograph", event)}
           >
@@ -86,7 +99,14 @@ export function DistanceHome({
             </span>
           </button>
         </div>
-        <div className="distance-top distance-ui">
+        {isOpen && (
+          <div
+            className="distance-vignette"
+            aria-hidden="true"
+            onClick={closePanel}
+          />
+        )}
+        <div className="distance-top distance-ui" inert={isOpen}>
           <span>
             Software engineer
             <br />
@@ -97,20 +117,29 @@ export function DistanceHome({
           </a>
         </div>
         <nav className="distance-nav distance-ui" aria-label="Personal site">
-          <Link href="/about" onClick={(event) => openPanel("about", event)}>
+          <Link
+            href="/about"
+            aria-current={panel === "about" ? "true" : undefined}
+            onClick={(event) => openPanel("about", event)}
+          >
             <span>About</span>
             <small>01</small>
             <span className="distance-dot" aria-hidden="true" />
           </Link>
           <Link
             href="/reading"
+            aria-current={panel === "reading" ? "true" : undefined}
             onClick={(event) => openPanel("reading", event)}
           >
             <span>Reading</span>
             <small>02</small>
             <span className="distance-dot" aria-hidden="true" />
           </Link>
-          <Link href="/music" onClick={(event) => openPanel("music", event)}>
+          <Link
+            href="/music"
+            aria-current={panel === "music" ? "true" : undefined}
+            onClick={(event) => openPanel("music", event)}
+          >
             <span>Music</span>
             <small>03</small>
             <span className="distance-dot" aria-hidden="true" />
@@ -126,7 +155,7 @@ export function DistanceHome({
             </button>
           </h1>
         </div>
-        <footer className="distance-bottom">
+        <footer className="distance-bottom" inert={isOpen}>
           <a
             className="distance-credit"
             href={photoSource}
@@ -162,54 +191,65 @@ export function DistanceHome({
         {panel && (
           <article>
             <header>
-              <button
-                autoFocus
-                onClick={closePanel}
-                aria-label="Close reading panel"
-              >
+              <button autoFocus onClick={closePanel} aria-label="Close panel">
                 Close <span aria-hidden="true">×</span>
               </button>
             </header>
-            <div className="distance-reader-body">
-              <h2 id="distance-reader-title">
-                {panel === "photograph"
-                  ? "Pale Blue Dot"
-                  : panel === "about"
-                    ? "About"
-                    : panel === "music"
-                      ? "Music"
-                      : "Reading"}
-              </h2>
-              {panel === "about" ? (
-                about
-              ) : panel === "reading" ? (
-                reading
-              ) : panel === "music" ? (
-                music
-              ) : (
-                <div className="distance-copy">
-                  <p>
-                    Pale Blue Dot has been my favorite photograph for a long
-                    time. It still moves me.
-                  </p>
-                  <Image
-                    className="distance-photo-detail"
-                    src="/images/pale-blue-dot.jpg"
-                    width={5230}
-                    height={5175}
-                    sizes="(max-width: 700px) 90vw, 510px"
-                    alt="Earth, a tiny pale point in a sunbeam, photographed by Voyager 1."
-                  />
-                  <p>
-                    Earth, photographed by Voyager 1 on February 14, 1990. This
-                    is the 2020 reprocessing of the image.
-                  </p>
-                  <a href={photoSource} target="_blank" rel="noreferrer">
-                    NASA / JPL-Caltech — image &amp; story ↗
-                  </a>
-                </div>
-              )}
-            </div>
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => {
+                if (dialog.current) dialog.current.scrollTop = 0;
+              }}
+            >
+              <motion.div
+                key={panel}
+                className="distance-reader-body"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.18 }}
+              >
+                <h2 id="distance-reader-title">
+                  {panel === "photograph"
+                    ? "Pale Blue Dot"
+                    : panel === "about"
+                      ? "About"
+                      : panel === "music"
+                        ? "Music"
+                        : "Reading"}
+                </h2>
+                {panel === "about" ? (
+                  about
+                ) : panel === "reading" ? (
+                  reading
+                ) : panel === "music" ? (
+                  music
+                ) : (
+                  <div className="distance-copy">
+                    <p>
+                      Pale Blue Dot has been my favorite photograph for a long
+                      time. It still moves me.
+                    </p>
+                    <Image
+                      className="distance-photo-detail"
+                      src="/images/pale-blue-dot.jpg"
+                      width={5230}
+                      height={5175}
+                      sizes="(max-width: 700px) 90vw, 510px"
+                      alt="Earth, a tiny pale point in a sunbeam, photographed by Voyager 1."
+                    />
+                    <p>
+                      Earth, photographed by Voyager 1 on February 14, 1990.
+                      This is the 2020 reprocessing of the image.
+                    </p>
+                    <a href={photoSource} target="_blank" rel="noreferrer">
+                      NASA / JPL-Caltech — image &amp; story ↗
+                    </a>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </article>
         )}
       </dialog>
