@@ -5,7 +5,12 @@ html:has(.distance),
   color-scheme: dark;
 }
 .distance-home:has(.distance-reader[open]) .distance-earth {
-  visibility: hidden;
+  opacity: 0;
+}
+.distance-ui,
+.distance-bottom,
+.distance-earth {
+  transition: opacity 0.7s ease;
 }
 body:has(.distance) {
   background: #080e12;
@@ -267,8 +272,11 @@ body:has(.distance)::after {
 .distance-reader::backdrop {
   background: linear-gradient(90deg, #060d1226 5%, #060d12db 57%, #060d12f5);
 }
-.distance-reader[open] {
-  animation: distance-reveal 0.5s ease-out;
+.distance-reader[open]::backdrop {
+  animation: distance-vignette-in 1.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.distance-reader[open] > article {
+  animation: distance-reveal 0.95s cubic-bezier(0.22, 0.61, 0.36, 1) 0.18s both;
 }
 .distance-reader article > header {
   display: flex;
@@ -522,10 +530,18 @@ body:has(.distance)::after {
   letter-spacing: -0.06em;
   color: var(--text);
 }
+@keyframes distance-vignette-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes distance-reveal {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -618,7 +634,7 @@ body:has(.distance)::after {
   .distance-home:has(.distance-reader[open]) .distance-ui,
   .distance-home:has(.distance-reader[open]) .distance-bottom,
   .distance-home:has(.distance-reader[open]) .distance-earth {
-    visibility: hidden;
+    opacity: 0;
   }
   .distance-reader {
     margin: auto;
@@ -673,7 +689,8 @@ body:has(.distance)::after {
   }
   .distance *,
   .distance *::before,
-  .distance *::after {
+  .distance *::after,
+  .distance *::backdrop {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
