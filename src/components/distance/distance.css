@@ -275,7 +275,7 @@ body:has(.distance)::after {
 .distance-reader[open]::backdrop {
   animation: distance-vignette-in 1.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
-.distance-reader[open] > article {
+.distance-reader[open] {
   animation: distance-reveal 0.95s cubic-bezier(0.22, 0.61, 0.36, 1) 0.18s both;
 }
 .distance-reader article > header {

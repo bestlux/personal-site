@@ -11,14 +11,16 @@ import {
 import { emailHref, photoSource } from "./content";
 import Link from "next/link";
 
-type Panel = "about" | "reading" | "photograph";
+type Panel = "about" | "reading" | "music" | "photograph";
 
 export function DistanceHome({
   about,
   reading,
+  music,
 }: {
   about: ReactNode;
   reading: ReactNode;
+  music: ReactNode;
 }) {
   const [panel, setPanel] = useState<Panel | null>(null);
   const [photographOnly, setPhotographOnly] = useState(false);
@@ -108,7 +110,7 @@ export function DistanceHome({
             <small>02</small>
             <span className="distance-dot" aria-hidden="true" />
           </Link>
-          <Link href="/music">
+          <Link href="/music" onClick={(event) => openPanel("music", event)}>
             <span>Music</span>
             <small>03</small>
             <span className="distance-dot" aria-hidden="true" />
@@ -174,12 +176,16 @@ export function DistanceHome({
                   ? "Pale Blue Dot"
                   : panel === "about"
                     ? "About"
-                    : "Reading"}
+                    : panel === "music"
+                      ? "Music"
+                      : "Reading"}
               </h2>
               {panel === "about" ? (
                 about
               ) : panel === "reading" ? (
                 reading
+              ) : panel === "music" ? (
+                music
               ) : (
                 <div className="distance-copy">
                   <p>

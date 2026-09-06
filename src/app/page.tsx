@@ -1,5 +1,10 @@
 import { DistanceHome } from "@/components/distance/home";
-import { AboutContent, BookList } from "@/components/distance/content";
+import {
+  AboutContent,
+  BookList,
+  MusicList,
+} from "@/components/distance/content";
+import { getMusicNotes } from "@/lib/content/music";
 import { JsonLd } from "@/components/json-ld";
 import { getBooks } from "@/lib/content/reading";
 import { siteConfig } from "@/lib/site-config";
@@ -22,6 +27,7 @@ export default function Home() {
       <DistanceHome
         about={<AboutContent />}
         reading={<BookList books={getBooks()} />}
+        music={<MusicList notes={getMusicNotes()} />}
       />
     </>
   );

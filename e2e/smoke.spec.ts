@@ -41,7 +41,10 @@ test("photograph view and Music navigation work on a phone", async ({
   ).toBeHidden();
   await page.getByRole("button", { name: "Return to iomancer" }).click();
   await page.getByRole("link", { name: "Music 03", exact: true }).click();
-  await expect(page).toHaveURL(/\/music$/);
+  await expect(
+    page.getByRole("dialog", { name: "Music", exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
   await expect(
     page.getByRole("heading", { name: "Music", exact: true }),
   ).toBeVisible();
@@ -49,6 +52,28 @@ test("photograph view and Music navigation work on a phone", async ({
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
+  ).toBe(true);
+});
+
+test("panel entrance does not create a transient scrollbar", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto("/");
+  await page.getByRole("link", { name: "Reading 02", exact: true }).click();
+  const overflow = await page.getByRole("dialog").evaluate((dialog) => {
+    for (const animation of dialog.getAnimations({ subtree: true })) {
+      animation.pause();
+      animation.currentTime = 200;
+    }
+    return dialog.scrollHeight > dialog.clientHeight;
+  });
+  expect(overflow).toBe(false);
+  await page.setViewportSize({ width: 390, height: 460 });
+  expect(
+    await page
+      .getByRole("dialog")
+      .evaluate((dialog) => dialog.scrollHeight > dialog.clientHeight),
   ).toBe(true);
 });
 
