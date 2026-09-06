@@ -1,6 +1,6 @@
 # Music
 
-Add one `.mdx` file per song, playlist, or listening essay. Nothing here is published until `notesPublished` is true.
+Add one `.mdx` file per song, playlist, or listening essay. Entries appear on the website when `notesPublished` is true. This repository is public: committed drafts are visible on GitHub regardless of that flag. Keep private drafts outside the repository.
 
 ```yaml
 ---

@@ -125,16 +125,14 @@ test("unknown book and music URLs return 404", async ({ request }) => {
   expect((await request.get("/music/not-a-song")).status()).toBe(404);
 });
 
-test("project filters and contact reveal work", async ({ page }) => {
-  await page.goto("/projects");
-  await page.getByRole("button", { name: "unity" }).click();
-  await expect(page.getByRole("link", { name: /voltline/i })).toBeVisible();
-
-  await page.goto("/contact");
-  await page.getByRole("button", { name: /reveal email/i }).click();
-  await expect(
-    page.getByRole("link", { name: /hello@iomancer\.dev/i }),
-  ).toBeVisible();
+test("retired content is unavailable and absent from the sitemap", async ({ request }) => {
+  for (const route of ["/resume", "/resume.pdf", "/projects", "/writing", "/now", "/rss.xml"]) {
+    expect((await request.get(route)).status(), route).toBe(404);
+  }
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const route of ["/resume", "/projects", "/writing", "/now"]) {
+    expect(sitemap).not.toContain(route);
+  }
 });
 
 test("no critical or serious axe violations on core routes", async ({
@@ -146,9 +144,6 @@ test("no critical or serious axe violations on core routes", async ({
     "/reading",
     "/reading/finite-and-infinite-games",
     "/music",
-    "/projects",
-    "/writing",
-    "/contact",
   ]) {
     await page.goto(route);
     await page.addScriptTag({ content: axe.source });

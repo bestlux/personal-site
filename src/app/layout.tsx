@@ -60,11 +60,6 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [distanceImage],
   },
-  alternates: {
-    types: {
-      "application/rss+xml": `${siteConfig.url}/rss.xml`,
-    },
-  },
 };
 
 export default function RootLayout({

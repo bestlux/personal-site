@@ -2,7 +2,7 @@
 
 A personal site built around Voyager 1's Pale Blue Dot. The homepage holds About, Reading, and Music, with an unobstructed photograph view. Reading and Music open into dedicated pages with shareable URLs and room for long notes.
 
-Built with Next.js App Router, TypeScript, IBM Plex Sans/Mono, and local MDX content. The original project, writing, and other URLs remain available under a separate route layout; the earlier design experiments live in `studies/`.
+Built with Next.js App Router, TypeScript, IBM Plex Sans/Mono, and local MDX content.
 
 ## Working locally
 
@@ -13,7 +13,7 @@ Built with Next.js App Router, TypeScript, IBM Plex Sans/Mono, and local MDX con
 - `npm run test:e2e` checks navigation, phone layouts, and accessibility on port 3101. Override with `PLAYWRIGHT_PORT` if needed.
 - `npm run build` creates the production app.
 
-The experiments use port 3100, independently: `npm --prefix studies run dev`.
+Only the current About, Reading, and Music sections are maintained.
 
 ## Book notes
 
@@ -40,4 +40,8 @@ Add an MDX file in `content/music/`. See its README for frontmatter. An entry ca
 
 The repository is linked to the Vercel `personal-site` project. Its production deployment follows GitHub `main` and serves `iomancer.dev`. Content is built into the site: edit, validate, commit, and push to update it. Set `NEXT_PUBLIC_SITE_URL` to override the canonical host.
 
-The photograph and source credit are in `public/images/ATTRIBUTION.md`. The old routes retain their existing presentation; the Distance homepage and reading pages do not load their command menu or animation shell.
+The photograph and source credit are in `public/images/ATTRIBUTION.md`. Retired routes are not published.
+
+## Publishing privacy
+
+This repository is public. Every committed file is visible on GitHub, including draft notes with `notesPublished: false`. Keep private drafts outside the repository and review content before committing. The flag controls website visibility only.
