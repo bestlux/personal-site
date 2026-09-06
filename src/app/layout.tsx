@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
+import {
+  Inter,
+  JetBrains_Mono,
+  Cormorant_Garamond,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
+} from "next/font/google";
 import { Analytics } from "@/components/analytics";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider } from "@/components/theme-provider";
-import { CommandPalette } from "@/components/command-palette";
 import { siteConfig } from "@/lib/site-config";
+import { distanceImage } from "@/lib/distance-metadata";
 import "./globals.css";
+import "@/components/distance/distance.css";
+
+const distanceSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--plex",
+});
+const distanceMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--mono",
+});
 
 const bodyFont = Inter({
   variable: "--font-body",
@@ -37,20 +52,13 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
-    images: [
-      {
-        url: "/og-default.png",
-        width: 1200,
-        height: 630,
-        alt: "iomancer site preview",
-      },
-    ],
+    images: [distanceImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/og-default.png"],
+    images: [distanceImage],
   },
   alternates: {
     types: {
@@ -65,17 +73,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} bg-bg text-text antialiased`}>
-        <ThemeProvider>
-          <CommandPalette />
-          <div className="scanlines" aria-hidden="true" />
-          <div className="site-shell relative min-h-screen flex flex-col">
-            <SiteHeader />
-            <main className="relative flex-1">{children}</main>
-            <SiteFooter />
-          </div>
-        </ThemeProvider>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <body
+        className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} ${distanceSans.variable} ${distanceMono.variable} bg-bg text-text antialiased`}
+      >
+        {children}
         <Analytics />
       </body>
     </html>

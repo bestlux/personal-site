@@ -1,19 +1,15 @@
 import Link from "next/link";
-import { Container } from "@/components/container";
+import { DistancePage } from "@/components/distance/page";
 
 export default function NotFound() {
   return (
-    <Container className="py-24">
-      <section className="content-shell space-y-4 py-10 text-center">
-        <p className="section-kicker justify-center">404</p>
-        <h1 className="font-display text-5xl leading-none text-text">Signal not found</h1>
-        <p className="text-text-dim">This route does not exist or is no longer available.</p>
-        <p>
-          <Link href="/" className="text-accent-secondary underline underline-offset-4">
-            Return to home
-          </Link>
-        </p>
-      </section>
-    </Container>
+    <DistancePage>
+      <span className="distance-eyebrow">404</span>
+      <h1>Nothing here.</h1>
+      <p className="distance-pending">This page doesn’t exist or has moved.</p>
+      <div className="distance-links">
+        <Link href="/">Return home</Link>
+      </div>
+    </DistancePage>
   );
 }

@@ -1,56 +1,43 @@
-# iomancer | Personal Signal Interface
+# iomancer — Distance
 
-A high-performance, industrial-themed personal engineering portfolio. Built with Next.js App Router, TypeScript, Tailwind CSS, and local MDX content.
+A personal site built around Voyager 1's Pale Blue Dot. The homepage holds About, Reading, and Music, with an unobstructed photograph view. Reading and Music open into dedicated pages with shareable URLs and room for long notes.
 
-Designed to emulate a tactical aerospace or mission-control dashboard, featuring fluid micro-interactions, a stark functional color palette, and a keyboard-first global command menu.
+Built with Next.js App Router, TypeScript, IBM Plex Sans/Mono, and local MDX content. The original project, writing, and other URLs remain available under a separate route layout; the earlier design experiments live in `studies/`.
 
-## Architecture & Tech Stack
+## Working locally
 
-- **Framework:** Next.js (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
-- **Animation:** Framer Motion (spring-physics based layout transitions)
-- **Content:** Local MDX validated rigorously by Zod
-- **UX Tooling:** `cmdk` (Global Command Palette), Radix UI (Accessibility), Lucide React (Icons)
-- **Deployment:** Vercel Web Analytics
+- `npm run dev` starts the main app.
+- `npm run lint` checks source.
+- `npm run typecheck` checks types (run the build first after changing routes).
+- `npm run test:unit` checks content loading and utilities.
+- `npm run test:e2e` checks navigation, phone layouts, and accessibility on port 3101. Override with `PLAYWRIGHT_PORT` if needed.
+- `npm run build` creates the production app.
 
-## Commands
+The experiments use port 3100, independently: `npm --prefix studies run dev`.
 
-```bash
-npm run dev
-npm run lint
-npm run typecheck
-npm run test:unit
-npm run test:e2e
-npm run build
+## Book notes
+
+Edit a file in `content/reading/`. The three selected books are already listed there. Write Markdown below the frontmatter, then set `notesPublished: true` when the note is ready. Until then, the book stays on the shelf with a "notes to come" message and its draft body is excluded from rendered output.
+
+```yaml
+---
+slug: finite-and-infinite-games
+title: Finite and Infinite Games
+author: James P. Carse
+order: 1
+notesPublished: false
+updatedAt: "2026-09-05"
+---
 ```
 
-## Content Authoring (MDX)
+`updatedAt` is optional. Keep the slug stable to preserve shared links. Published notes must contain text. Headings, paragraphs, quotes, lists, links, images, tables, and code blocks are supported. A reading time is calculated automatically.
 
-All content is statically managed in the `content/` directory:
-- `content/projects/*.mdx` - Project dossiers and case studies.
-- `content/writing/*.mdx` - Technical essays and telemetry logs.
-- `content/now/*.mdx` - Monthly "Now Dashboard" system status updates.
-- `content/pages/resume.mdx` - Professional history.
+## Music
 
-Frontmatter is strictly typed and validated with Zod at runtime (`src/lib/content/schemas.ts`).
+Add an MDX file in `content/music/`. See its README for frontmatter. An entry can be a song link, a playlist, an essay, or a link accompanied by notes. Music drafts stay out of the index, sitemap, and public routes until `notesPublished` is true. No songs or personal reflections have been invented to fill this section.
 
-### Custom MDX Components
-- `<Callout type="info|warning|error">` - Renders a tactical system alert box inside articles.
-- Code blocks (`<pre>`) are styled as stark terminal output panels.
+## Deployment
 
-## UI Design Language
+The repository is linked to the Vercel `personal-site` project. Its production deployment follows GitHub `main` and serves `iomancer.dev`. Content is built into the site: edit, validate, commit, and push to update it. Set `NEXT_PUBLIC_SITE_URL` to override the canonical host.
 
-The site employs a **High-Tech Brutalism / Aerospace** aesthetic:
-- **Typography:** `Inter` for highly readable body prose, `JetBrains Mono` for all data, telemetry, and structural UI elements.
-- **Grids & Borders:** Heavy reliance on 1px functional borders, removing all soft shadows and glassmorphism.
-- **Micro-interactions:**
-  - `<TextScramble />` - Hardware decryption effect on primary headers.
-  - Hover states trigger tactical 90-degree crosshair rotations.
-  - A global, subtle CSS CRT scanline overlay (`.scanlines`).
-  - Native-app style page transitions (`layoutId` navigation underlines, `Template` sliding page mounts).
-
-## Domain
-
-Recommended launch domain: `iomancer.dev`.
-Set canonical host via `NEXT_PUBLIC_SITE_URL`.
+The photograph and source credit are in `public/images/ATTRIBUTION.md`. The old routes retain their existing presentation; the Distance homepage and reading pages do not load their command menu or animation shell.
